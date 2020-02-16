@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico" />
+
+<title>Management Page</title>
+
+<link href="/webjars/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+    var traders = /*[[${traders}]]*/ 'default';
+    var items = /*[[${items}]]*/ 'default';
+    var boxTypes = /*[[${boxTypes}]]*/ 'default';
+   
+   // console.log(message);
+
+/*]]>*/
+</script>
+
+</head>
+<body>
+	<div class="container">
+		<!-- Static navbar -->
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#" th:text="${username}">User
+						Name</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="/admin">Home</a></li>
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Management</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Settings <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li role="separator" class="divider"></li>
+								<li class="dropdown-header">Nav header</li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul></li>
+					</ul>
+					<form class="navbar-form navbar-left" action="/action_page.php">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search">
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="./">Default <span
+								class="sr-only">(current)</span></a></li>
+						<li><a href="#">Static top</a></li>
+						<li><a href="/logout">Sign Out<span
+								class="glyphicon glyphicon-log-out"></span></a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!--/.container-fluid -->
+		</nav>
+		<!-- Main component for a primary marketing message or call to action -->
+
+		<!-- Main component for a Tab-->
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+			<li><a data-toggle="tab" href="#menu1">Challan Entry</a></li>
+			<li><a data-toggle="tab" href="#menu2">Update Distribution</a></li>
+			<li><a data-toggle="tab" href="#menu3">Add New</a></li>
+			<li><a data-toggle="tab" href="#menu3">Data Management</a></li>
+			<li><a data-toggle="tab" href="#menu3">Settings</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="home" class="tab-pane fade in active">
+				<h3>HOME</h3>
+				<p>This is home page reserve for showing all stats for business</p>
+			</div>
+			<div id="menu1" class="tab-pane fade">
+				<h3>Challan Entry</h3>
+				<form class="form-inline" action="/management/saveChallan">
+					<div class="row" >
+					<label for="birthday">Date:</label> <input type="date" id="date" name="date" class="form-control">
+					<label for="birthday">Truck No:</label> <input type="text" name='TruckNo' placeholder='Truck No' class="form-control" />
+					<label for="birthday">Driver Name:</label> <input type="text" name='driverName' placeholder='Driver Name' class="form-control" />
+					<label for="birthday">Driver Mobile:</label> <input type="text" name='driverMobile' placeholder='Driver Mobile' class="form-control" />
+					</div>
+					<div class="row clearfix">
+								<div class="col-md-12 column">
+									<table class="table table-bordered table-hover" id="tab_logic">
+										<thead>
+											<tr>
+												<th class="text-center">#</th>
+												<th class="text-center">Trader</th>
+												<th class="text-center">Item Type</th>
+												<th class="text-center">Box Type</th>
+												<th class="text-center">Total QTY</th>
+												<th class="text-center">Receiver</th>
+												<th class="text-center">Total WT</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr id='addr0'>
+												<td>1</td>
+												<td><select class="form-control" id="traders"
+													name="trader_id0">
+														<option value="0">select Trader</option>
+														<option th:each="trader : ${traders}"
+															th:value="${trader.trader_id}"
+															th:text="${trader.trader_name +'('+ trader.trader_mark+')'}"  ></option>
+												</select></td>
+												<td><select class="form-control" id="items"
+													name="item_id0">
+														<option value="0">select Item</option>
+														<option th:each="item : ${items}"
+															th:value="${item.item_id}" th:text="${item.item_name }"></option>
+												</select></td>
+												<td><select class="form-control" id="boxTypes"
+													name="box_id0">
+														<option value="0">select Box</option>
+														<option th:each="boxType : ${boxTypes}"
+															th:value="${boxType.box_id}"
+															th:text="${boxType.box_name }"></option>
+												</select></td>
+												<td><input type="text" name='TotalQty0'
+													placeholder='Total Q' class="form-control" /></td>
+												<td><input type="text" name='receiver0'
+													placeholder='Receiver' class="form-control" /></td>
+												<td><input type="text" name='totalWt0'
+													placeholder='Total Wt' class="form-control" /></td>
+											</tr>
+											<tr id='addr1'></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<a id="add_row" class="btn btn-default pull-left">Add Row</a> <a
+								id='delete_row' class="btn btn-default pull-right">Delete
+								Row</a>
+							<button type="submit" class="btn btn-info center-block">Save
+							</button>
+				</form>
+			</div>
+			<div id="menu2" class="tab-pane fade">
+				<h3>Menu 2</h3>
+				<p>Sed ut perspiciatis unde omnis iste natus error sit
+					voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+			</div>
+			<div id="menu3" class="tab-pane fade">
+				<h3>Menu 3</h3>
+				<p>Eaque ipsa quae ab illo inventore veritatis et quasi
+					architecto beatae vitae dicta sunt explicabo.</p>
+			</div>
+		</div>
+		<!-- End Main component for a Tab-->
+
+	</div>
+	<!-- Bootstrap core JavaScript
+================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/challanTable.js"></script>
+
+
+	<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+ -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+</body>
+</html>
