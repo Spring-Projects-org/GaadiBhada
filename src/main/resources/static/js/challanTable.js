@@ -25,7 +25,7 @@ $(document).ready(function(){
         	  itemList=itemList+"<option value=\""+ items[j].item_id +"\">"+items[j].item_name+"</option>";
  			
        		}
-          for(j=0;j<items.length;j++){
+          for(j=0;j<boxTypes.length;j++){
      		 
      		 
         	  boxTypesList=boxTypesList+"<option value=\""+ boxTypes[j].box_id +"\">"+boxTypes[j].box_name+"</option>";
@@ -33,19 +33,19 @@ $(document).ready(function(){
        		}
     	 //alert(list);
       $('#addr'+i).html("<td>"+ (i+1) +"</td>" +
-      		"<td><select class='form-control' id='traders' name='trader_id'"+i+"><option value='0'>select Trader</option>"+
+      		"<td><select class='form-control' id='traders' name='traderId'><option value='0'>select Trader</option>"+
       		traderList
            +"</select> </td>" +
-           "<td><select class='form-control' id='items' name='item_id'"+i+"><option value='0'>select Item</option>"+
+           "<td><select class='form-control' id='items' name='itemId' ><option value='0'>select Item</option>"+
            itemList
            +"</select> </td>" +
-           "<td><select class='form-control' id='boxTypes' name='box_id'"+i+"><option value='0'>select Box</option>"+
+           "<td><select class='form-control' id='boxTypes' name='boxId'><option value='0'>select Box</option>"+
            boxTypesList
            +"</select> </td>" +
            
-    		"<td><input  name='TotalQty"+i+"' type='text' placeholder='Total Q'  class='form-control input-md'></td>"+
-    		"<td><input  name='receiver"+i+"' type='text' placeholder='Receiver'  class='form-control input-md'></td>"+
-    		"<td><input  name='totalWt"+i+"' type='text' placeholder='Total Wt'  class='form-control input-md'></td>");
+    		"<td><input  name='totalQty' type='text' placeholder='Total Q'  class='form-control input-md'></td>"+
+    		"<td><input  name='receiver' type='text' placeholder='Receiver'  class='form-control input-md'></td>"+
+    		"<td><input  name='totalWt' type='text' placeholder='Total Wt'  class='form-control input-md'></td>");
 
       $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
       i++; 

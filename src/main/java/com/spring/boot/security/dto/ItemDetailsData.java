@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.boot.security.formData.ItemDetails;
+import com.spring.boot.security.entity.ItemDetails;
 import com.spring.boot.security.repository.ItemDetailsRepository;
 
 @Service

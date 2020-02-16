@@ -101,12 +101,12 @@
 			</div>
 			<div id="menu1" class="tab-pane fade">
 				<h3>Challan Entry</h3>
-				<form class="form-inline" action="/management/saveChallan">
+				<form class="form-inline" th:object="${challanBookForm}"  action="/management/saveChallan"  name="challanId">
 					<div class="row" >
-					<label for="birthday">Date:</label> <input type="date" id="date" name="date" class="form-control">
-					<label for="birthday">Truck No:</label> <input type="text" name='TruckNo' placeholder='Truck No' class="form-control" />
-					<label for="birthday">Driver Name:</label> <input type="text" name='driverName' placeholder='Driver Name' class="form-control" />
-					<label for="birthday">Driver Mobile:</label> <input type="text" name='driverMobile' placeholder='Driver Mobile' class="form-control" />
+					<label for="challanDate">Date:</label> <input type="date" id="date" name="date" class="form-control">
+					<label for="TruckNo">Truck No:</label> <input type="text" name='truckNo' placeholder='Truck No' class="form-control" />
+					<label for="DriverName">Driver Name:</label> <input type="text" name='driverName' placeholder='Driver Name' class="form-control" />
+					<label for="DriverMobile">Driver Mobile:</label> <input type="text" name='driverMobile' placeholder='Driver Mobile' class="form-control" />
 					</div>
 					<div class="row clearfix">
 								<div class="col-md-12 column">
@@ -126,30 +126,30 @@
 											<tr id='addr0'>
 												<td>1</td>
 												<td><select class="form-control" id="traders"
-													name="trader_id0">
+													name="traderId">
 														<option value="0">select Trader</option>
 														<option th:each="trader : ${traders}"
 															th:value="${trader.trader_id}"
 															th:text="${trader.trader_name +'('+ trader.trader_mark+')'}"  ></option>
 												</select></td>
 												<td><select class="form-control" id="items"
-													name="item_id0">
+													name="itemId">
 														<option value="0">select Item</option>
 														<option th:each="item : ${items}"
 															th:value="${item.item_id}" th:text="${item.item_name }"></option>
 												</select></td>
 												<td><select class="form-control" id="boxTypes"
-													name="box_id0">
+													name="boxId">
 														<option value="0">select Box</option>
 														<option th:each="boxType : ${boxTypes}"
 															th:value="${boxType.box_id}"
 															th:text="${boxType.box_name }"></option>
 												</select></td>
-												<td><input type="text" name='TotalQty0'
+												<td><input type="text" name='totalQty'
 													placeholder='Total Q' class="form-control" /></td>
-												<td><input type="text" name='receiver0'
+												<td><input type="text" name='receiver'
 													placeholder='Receiver' class="form-control" /></td>
-												<td><input type="text" name='totalWt0'
+												<td><input type="text" name='totalWt'
 													placeholder='Total Wt' class="form-control" /></td>
 											</tr>
 											<tr id='addr1'></tr>

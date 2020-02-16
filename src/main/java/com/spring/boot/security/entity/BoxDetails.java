@@ -1,4 +1,4 @@
-package com.spring.boot.security.formData;
+package com.spring.boot.security.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

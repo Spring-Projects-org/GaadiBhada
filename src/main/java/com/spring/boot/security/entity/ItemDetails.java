@@ -1,4 +1,4 @@
-package com.spring.boot.security.formData;
+package com.spring.boot.security.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +10,9 @@ public class ItemDetails {
 	
 	@Id
 	private int item_id;
+	private String item_name;
+	private String item_description;
+	
 	public int getItem_id() {
 		return item_id;
 	}
@@ -28,7 +31,6 @@ public class ItemDetails {
 	public void setItem_description(String item_description) {
 		this.item_description = item_description;
 	}
-	private String item_name;
-	private String item_description;
+	
 
 }

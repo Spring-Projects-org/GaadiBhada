@@ -42,23 +42,5 @@ public class ManagementFormController {
 		
 		
 	}
-	
-	@RequestMapping(value="/management/saveChallan")
-	public String saveChallan(Model model)
-	{
-		SecurityUtils securityUtils=new SecurityUtils();
-		String username=securityUtils.getUser();
-        List<Trader> traders=traderData.getAllTradersList();
-		model.addAttribute("username", username);
-		//Map<Integer,String> traders=fetchTrader()
-	      
-	      model.addAttribute("traders", traders);
-	      model.addAttribute("items", itemDetailsData.getAllItems());
-	      model.addAttribute("boxTypes", boxDetailsData.getAllBoxType());
-		
-	      return "management";
-		
-		
-	}
 
 }
