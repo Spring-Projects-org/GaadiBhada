@@ -16,7 +16,7 @@ public class ChallanBook {
 	@Id
 	@Column(name="challan_id")
 	@GeneratedValue
-	private long challanId;
+	private int challanId;
 	@Column(name="challan_date")
 	private Date date;
 	@Column(name="truck_no")
@@ -24,13 +24,14 @@ public class ChallanBook {
 	@Column(name="driver_name")
 	private String driverName;
 	@Column(name="driver_mobile")
-	private long driverMobile;
+	private String driverMobile;
 	
 	
-	public long getChallanId() {
+	
+	public int getChallanId() {
 		return challanId;
 	}
-	public void setChallanId(long challanId) {
+	public void setChallanId(int challanId) {
 		this.challanId = challanId;
 	}
 	public Date getDate() {
@@ -51,12 +52,12 @@ public class ChallanBook {
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
 	}
-	public long getDriverMobile() {
+	
+	public String getDriverMobile() {
 		return driverMobile;
 	}
-	public void setDriverMobile(long driverMobile) {
+	public void setDriverMobile(String driverMobile) {
 		this.driverMobile = driverMobile;
-	}
-	
+	}	
 
 }

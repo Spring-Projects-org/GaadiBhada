@@ -20,7 +20,6 @@
     var items = /*[[${items}]]*/ 'default';
     var boxTypes = /*[[${boxTypes}]]*/ 'default';
    
-   // console.log(message);
 
 /*]]>*/
 </script>
@@ -101,10 +100,11 @@
 			</div>
 			<div id="menu1" class="tab-pane fade">
 				<h3>Challan Entry</h3>
-				<form class="form-inline" th:object="${challanBookForm}"  action="/management/saveChallan"  name="challanId">
+				
+				<form class="form-inline" th:object="${challanBookForm}"  action="/management/saveChallan"  name="challanForm" data-toggle="validator">
 					<div class="row" >
-					<label for="challanDate">Date:</label> <input type="date" id="date" name="date" class="form-control">
-					<label for="TruckNo">Truck No:</label> <input type="text" name='truckNo' placeholder='Truck No' class="form-control" />
+					<label for="challanDate">Date:</label> <input type="date" id="date" name="date" class="form-control" required>
+					<label for="TruckNo">Truck No:</label> <input type="text" name='truckNo' placeholder='Truck No' class="form-control" required/>
 					<label for="DriverName">Driver Name:</label> <input type="text" name='driverName' placeholder='Driver Name' class="form-control" />
 					<label for="DriverMobile">Driver Mobile:</label> <input type="text" name='driverMobile' placeholder='Driver Mobile' class="form-control" />
 					</div>
@@ -119,38 +119,37 @@
 												<th class="text-center">Box Type</th>
 												<th class="text-center">Total QTY</th>
 												<th class="text-center">Receiver</th>
-												<th class="text-center">Total WT</th>
+												
 											</tr>
 										</thead>
 										<tbody>
 											<tr id='addr0'>
 												<td>1</td>
-												<td><select class="form-control" id="traders"
-													name="traderId">
-														<option value="0">select Trader</option>
+												<td><select class="form-control" id="traders" 
+													name="traderId" required >
+														<option value="">Select Trader</option>
 														<option th:each="trader : ${traders}"
 															th:value="${trader.trader_id}"
 															th:text="${trader.trader_name +'('+ trader.trader_mark+')'}"  ></option>
 												</select></td>
 												<td><select class="form-control" id="items"
-													name="itemId">
-														<option value="0">select Item</option>
+													name="itemId" required>
+														<option value="">Select Item</option>
 														<option th:each="item : ${items}"
 															th:value="${item.item_id}" th:text="${item.item_name }"></option>
 												</select></td>
 												<td><select class="form-control" id="boxTypes"
-													name="boxId">
-														<option value="0">select Box</option>
+													name="boxId" required>
+														<option value="">Select</option>
 														<option th:each="boxType : ${boxTypes}"
 															th:value="${boxType.box_id}"
-															th:text="${boxType.box_name }"></option>
+															th:text="${boxType.box_name+'-'+boxType.total_wt }"></option>
 												</select></td>
 												<td><input type="text" name='totalQty'
-													placeholder='Total Q' class="form-control" /></td>
+													placeholder='Total Q' class="form-control" required /></td>
 												<td><input type="text" name='receiver'
 													placeholder='Receiver' class="form-control" /></td>
-												<td><input type="text" name='totalWt'
-													placeholder='Total Wt' class="form-control" /></td>
+												
 											</tr>
 											<tr id='addr1'></tr>
 										</tbody>

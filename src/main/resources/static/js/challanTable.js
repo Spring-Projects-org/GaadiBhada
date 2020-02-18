@@ -1,6 +1,22 @@
      
 $(document).ready(function(){
-      var i=1;
+      
+	
+	function getTotalWt() {
+		
+		var sel = document.challanForm.boxId;
+		if(sel=="")
+			WtPerBox=0;
+		else
+			var opt = sel.options[sel.selectedIndex];
+		var WtPerBox=opt.text.split('-')[1];
+		var totalQty=document.challanForm.totalQty.value;
+		var result=WtPerBox*totalQty;
+		alert("Result"+result)
+		//document.challanForm.totalQty.innerHTML = totalQty*WtPerBox;
+		document.challanForm.tw.value = result;
+	}
+	var i=1;
      
      $("#add_row").click(function(){
     	 var j;
@@ -16,7 +32,7 @@ $(document).ready(function(){
     	 for(j=0;j<traders.length;j++){
     		 
     		 
-    		 traderList=traderList+"<option value=\""+ traders[j].trader_id +"\">"+traders[j].trader_name+"</option>";
+    		 traderList=traderList+"<option value=\""+ traders[j].trader_id +"\">"+traders[j].trader_name+"("+traders[j].trader_mark+")</option>";
  			
        		}
           for(j=0;j<items.length;j++){
@@ -28,24 +44,24 @@ $(document).ready(function(){
           for(j=0;j<boxTypes.length;j++){
      		 
      		 
-        	  boxTypesList=boxTypesList+"<option value=\""+ boxTypes[j].box_id +"\">"+boxTypes[j].box_name+"</option>";
+        	  boxTypesList=boxTypesList+"<option value=\""+ boxTypes[j].box_id +"\">"+boxTypes[j].box_name+"-"+boxTypes[j].total_wt+"</option>";
  			
        		}
     	 //alert(list);
       $('#addr'+i).html("<td>"+ (i+1) +"</td>" +
-      		"<td><select class='form-control' id='traders' name='traderId'><option value='0'>select Trader</option>"+
+      		"<td><select class='form-control' id='traders' name='traderId' required><option value=''>Select Trader</option>"+
       		traderList
            +"</select> </td>" +
-           "<td><select class='form-control' id='items' name='itemId' ><option value='0'>select Item</option>"+
+           "<td><select class='form-control' id='items' name='itemId' required ><option value=''>Select Item</option>"+
            itemList
            +"</select> </td>" +
-           "<td><select class='form-control' id='boxTypes' name='boxId'><option value='0'>select Box</option>"+
+           "<td><select class='form-control' id='boxTypes' name='boxId' required><option value=''>Select</option>"+
            boxTypesList
            +"</select> </td>" +
            
-    		"<td><input  name='totalQty' type='text' placeholder='Total Q'  class='form-control input-md'></td>"+
-    		"<td><input  name='receiver' type='text' placeholder='Receiver'  class='form-control input-md'></td>"+
-    		"<td><input  name='totalWt' type='text' placeholder='Total Wt'  class='form-control input-md'></td>");
+    		"<td><input  name='totalQty' type='text' placeholder='Total Q'  class='form-control input-md' required onclick='getTotalWt()'></td>"+
+    		"<td><input  name='receiver' type='text' placeholder='Receiver'  class='form-control input-md' ></td>"
+    		);
 
       $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
       i++; 

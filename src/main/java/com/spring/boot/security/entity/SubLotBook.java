@@ -10,23 +10,23 @@ public class SubLotBook {
 
 	
 	@Id
-	private long sub_lot_id;
-	private long lot_id;
+	private int sub_lot_id;
+	private int lot_id;
 	private String receiver;
 	private int total_qty;
 	private int total_fare;
 	
 	
-	public long getSub_lot_id() {
+	public int getSub_lot_id() {
 		return sub_lot_id;
 	}
-	public void setSub_lot_id(long sub_lot_id) {
+	public void setSub_lot_id(int sub_lot_id) {
 		this.sub_lot_id = sub_lot_id;
 	}
-	public long getLot_id() {
+	public int getLot_id() {
 		return lot_id;
 	}
-	public void setLot_id(long lot_id) {
+	public void setLot_id(int lot_id) {
 		this.lot_id = lot_id;
 	}
 	public String getReceiver() {

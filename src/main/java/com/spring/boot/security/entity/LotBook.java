@@ -13,43 +13,45 @@ public class LotBook {
 	@Id
 	@GeneratedValue
 	@Column(name="lot_id")
-	private long lotId;
+	private int lotId;
 	@Column(name="challan_id")
-	private long challanId;
+	private int challanId;
 	@Column(name="trader_id")
-	private String traderId;
+	private int traderId;
 	@Column(name="item_id")
-	private String itemId;
+	private int itemId;
 	@Column(name="total_qty")
 	private int totalQty;
 	@Column(name="total_wt")
 	private int totalWt;
 	@Column(name="box_id")
 	private int boxId;
-	public long getLotId() {
+	
+	
+	public int getLotId() {
 		return lotId;
 	}
 	
 	
-	public void setLotId(long lotId) {
+	public void setLotId(int lotId) {
 		this.lotId = lotId;
 	}
-	public long getChallanId() {
+	public int getChallanId() {
 		return challanId;
 	}
-	public void setChallanId(long challanId) {
+	public void setChallanId(int challanId) {
 		this.challanId = challanId;
 	}
-	public String getTraderId() {
+	public int getTraderId() {
 		return traderId;
 	}
-	public void setTraderId(String traderId) {
+	public void setTraderId(int traderId) {
 		this.traderId = traderId;
 	}
-	public String getItemId() {
+	public int getItemId() {
 		return itemId;
 	}
-	public void setItemId(String itemId) {
+	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 	public int getTotalQty() {
