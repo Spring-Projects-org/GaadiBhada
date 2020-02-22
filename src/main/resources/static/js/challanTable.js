@@ -1,7 +1,60 @@
      
 $(document).ready(function(){
-      
 	
+	//below function required to load js functions after page is dynamically loaded
+	function loadjs(file) {
+        var script = document.createElement("script");
+        script.type = "application/javascript";
+        script.src = file;
+        document.body.appendChild(script);
+    }
+	
+	function callAjaxForUpdateDistribution()
+	{
+		$.ajax({
+		    type : "GET",
+		    url : "/updateDistribution",
+		    data : {
+		    "id" : 1
+		    },
+		    success: function(data){
+		    	$('#menu2').html(data);
+		    	
+		    	loadjs("/js/dataTable.js");
+		    	$('#updateTable').DataTable();
+		    	
+		    }
+		});
+	}
+	//Calling Ajax to load the updated distribution page dynamically
+	$("#updateTab").on("click", function() {
+		
+		callAjaxForUpdateDistribution();
+		
+		//$('#updateTable').DataTable();
+		
+    });
+	//$('#updateTable').DataTable();
+   
+	$("#openTab2").on("click", function() {
+        $("#tab2").load('/Controller2/Index');
+    });
+    
+	 
+	 
+    //For redirecting same tab when page is refreshed  
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = localStorage.getItem('activeTab');
+    //alert(activeTab !== "#menu2")
+    //Since menu2 is dynamic page it should be loaded runtime
+    if(activeTab /*&& activeTab !== "#menu2"*/){
+        $('#menuTab a[href="' + activeTab + '"]').tab('show');
+        callAjaxForUpdateDistribution();
+    }
+    
+    //Calculating WT
 	function getTotalWt() {
 		
 		var sel = document.challanForm.boxId;
@@ -16,6 +69,7 @@ $(document).ready(function(){
 		//document.challanForm.totalQty.innerHTML = totalQty*WtPerBox;
 		document.challanForm.tw.value = result;
 	}
+	
 	var i=1;
      
      $("#add_row").click(function(){
@@ -55,11 +109,11 @@ $(document).ready(function(){
            "<td><select class='form-control' id='items' name='itemId' required ><option value=''>Select Item</option>"+
            itemList
            +"</select> </td>" +
-           "<td><select class='form-control' id='boxTypes' name='boxId' required><option value=''>Select</option>"+
+           "<td><select class='form-control' id='boxTypes' name='boxId' required><option value=''>Select Type</option>"+
            boxTypesList
            +"</select> </td>" +
            
-    		"<td><input  name='totalQty' type='text' placeholder='Total Q'  class='form-control input-md' required onclick='getTotalWt()'></td>"+
+    		"<td><input  name='totalQty' type='text' placeholder='Total Quantity'  class='form-control input-md' required onclick='getTotalWt()'></td>"+
     		"<td><input  name='receiver' type='text' placeholder='Receiver'  class='form-control input-md' ></td>"
     		);
 

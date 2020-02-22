@@ -12,8 +12,8 @@ public class ChallanBookData {
 	@Autowired
 	ChallanBookRepository challanBookRepository;
 	
-	public void saveChallanData(ChallanBook challanBook)	{
-		challanBookRepository.save(challanBook);
+	public ChallanBook saveChallanData(ChallanBook challanBook)	{
+		return challanBookRepository.save(challanBook);
 	}
 
 }

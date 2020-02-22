@@ -1,6 +1,9 @@
 package com.spring.boot.security.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,12 +13,16 @@ public class SubLotBook {
 
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int sub_lot_id;
 	private int lot_id;
 	private String receiver;
 	private int total_qty;
 	private int total_fare;
-	
+	@Column(name="crte_tms")
+	private String createTimeStamp;
+	@Column(name="session_id")
+	private String sessionId;
 	
 	public int getSub_lot_id() {
 		return sub_lot_id;
@@ -46,5 +53,17 @@ public class SubLotBook {
 	}
 	public void setTotal_fare(int total_fare) {
 		this.total_fare = total_fare;
+	}
+	public String getCreateTimeStamp() {
+		return createTimeStamp;
+	}
+	public void setCreateTimeStamp(String createTimeStamp) {
+		this.createTimeStamp = createTimeStamp;
+	}
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 }

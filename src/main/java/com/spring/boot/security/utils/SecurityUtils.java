@@ -36,9 +36,9 @@ public class SecurityUtils {
 		
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
-	public static List getRoles(String username,DataSource dataSource)
+	public static List <String> getRoles(String username,DataSource dataSource)
 	{
-		List list=new ArrayList();
+		List<String> list=new ArrayList<String>();
 		String sql="select role from "+ TableConstant.USER_ROLE_TABLE+" where username=?";
 		JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
 		list=jdbcTemplate.queryForList(sql, new Object[] {username}, String.class);
@@ -46,7 +46,7 @@ public class SecurityUtils {
 		
 	}
 	
-	public String getUserLastLogin(String username,DataSource dataSource)
+	public static String getUserLastLogin(String username,DataSource dataSource)
 	{
 		String sql="select max(lastLogin) as lastLogin from "+ TableConstant.USER_EVENT_TABLE+" where username=?";
 		JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
@@ -55,23 +55,25 @@ public class SecurityUtils {
 		
 	}
 	
-	public void logUserEvent(String username,DataSource dataSource)
+	public static void logUserEvent(String username,String sessionId,DataSource dataSource)
 	{
 		java.util.Date dt = new java.util.Date();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String currentDate=sdf.format(dt);
-		String sql="insert into "+ TableConstant.USER_EVENT_TABLE+" (lastLogin,username) values('"+currentDate+"','"+username+"')";
+		String sql="insert into "+ TableConstant.USER_EVENT_TABLE+" (lastLogin,username,session_id) values('"+currentDate+"','"+username+"','"+sessionId+"')";
 		JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
 		jdbcTemplate.execute(sql);		
 		
 		
 	}
-	public void logUserLogout(String username,DataSource dataSource)
+	public static void logUserLogout(String username,DataSource dataSource)
 	{
 		java.util.Date dt = new java.util.Date();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String lastLogin=getUserLastLogin(username,dataSource);
 		String currentDate=sdf.format(dt);
 		String sql="update "+ TableConstant.USER_EVENT_TABLE+" set lastLogout='"+currentDate+"' where username='"+username+"' and lastLogin='"+getUserLastLogin(username,dataSource)+"'";
+		System.out.println("lastLogin:"+lastLogin+" And Sql:"+sql);
 		JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
 		jdbcTemplate.execute(sql);		
 		

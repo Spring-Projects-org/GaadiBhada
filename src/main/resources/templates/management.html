@@ -13,13 +13,17 @@
 <title>Management Page</title>
 
 <link href="/webjars/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+<link href="/css/dataTable.css" rel="stylesheet"></link>
+
 <script th:inline="javascript">
+
 /*<![CDATA[*/
 
     var traders = /*[[${traders}]]*/ 'default';
     var items = /*[[${items}]]*/ 'default';
     var boxTypes = /*[[${boxTypes}]]*/ 'default';
-   
+    var destinations=/*[[${destinations}]]*/ 'default';
+    //var sources=/*[[${sources}]]*/ 'default';
 
 /*]]>*/
 </script>
@@ -84,10 +88,10 @@
 		<!-- Main component for a primary marketing message or call to action -->
 
 		<!-- Main component for a Tab-->
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs" id="menuTab">
 			<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
 			<li><a data-toggle="tab" href="#menu1">Challan Entry</a></li>
-			<li><a data-toggle="tab" href="#menu2">Update Distribution</a></li>
+			<li><a data-toggle="tab" href="#menu2" id="updateTab">Update Distribution</a></li>
 			<li><a data-toggle="tab" href="#menu3">Add New</a></li>
 			<li><a data-toggle="tab" href="#menu3">Data Management</a></li>
 			<li><a data-toggle="tab" href="#menu3">Settings</a></li>
@@ -100,13 +104,39 @@
 			</div>
 			<div id="menu1" class="tab-pane fade">
 				<h3>Challan Entry</h3>
-				
-				<form class="form-inline" th:object="${challanBookForm}"  action="/management/saveChallan"  name="challanForm" data-toggle="validator">
-					<div class="row" >
-					<label for="challanDate">Date:</label> <input type="date" id="date" name="date" class="form-control" required>
-					<label for="TruckNo">Truck No:</label> <input type="text" name='truckNo' placeholder='Truck No' class="form-control" required/>
-					<label for="DriverName">Driver Name:</label> <input type="text" name='driverName' placeholder='Driver Name' class="form-control" />
-					<label for="DriverMobile">Driver Mobile:</label> <input type="text" name='driverMobile' placeholder='Driver Mobile' class="form-control" />
+				<div th:switch="${message}">
+					<div th:case="'Success'" class="alert alert-success">
+						<strong>Success!</strong> Challan Data Is Saved successfully.
+					</div>
+					<div th:case="'Failed'" class="alert alert-danger">
+						<strong>Failure!</strong> Operation failed !! <p th:text="${exception}">Exception</p>
+					</div>
+				</div>
+				<form class="form-inline" th:object="${challanBookForm}"  action="/management/saveChallan" method="post" name="challanForm" data-toggle="validator">
+					<div class="row clearfix">
+								<div class="col-md-12 column">
+									<table class="table table-bordered table-hover" id="challanTab">
+										
+										<tbody>
+					<tr>
+					<td> <input type="date" id="date" name="date" class="form-control" required></td>
+					<td><select class="form-control" id="source" name="sourceId" required >
+					  <option value="">Select Source</option>
+					  <option value="1">Nasik</option>
+					<option th:each="source : ${sources}" th:value="${source.sourceId}" th:text="${source.source}"  ></option>
+					</select></td>
+					 <td><select class="form-control" id="destination" name="destinationId" required >
+					  <option value="">Select Destination</option>
+					<option th:each="destination : ${destinations}" th:value="${destination.destinationId}" th:text="${destination.destination}"  ></option>
+					</select></td>
+					<td><input type="text" name='truckNo' placeholder='Truck No' class="form-control" required/></td>
+					 <td><input type="text" name='driverName' placeholder='Driver Name' class="form-control" /></td>
+					 <td><input type="text" name='driverMobile' placeholder='Driver Mobile' class="form-control" /></td>
+					
+					 </tr>
+					 </tbody>
+					 </table>
+					 </div>
 					</div>
 					<div class="row clearfix">
 								<div class="col-md-12 column">
@@ -140,13 +170,13 @@
 												</select></td>
 												<td><select class="form-control" id="boxTypes"
 													name="boxId" required>
-														<option value="">Select</option>
+														<option value="">Select Type </option>
 														<option th:each="boxType : ${boxTypes}"
 															th:value="${boxType.box_id}"
 															th:text="${boxType.box_name+'-'+boxType.total_wt }"></option>
 												</select></td>
 												<td><input type="text" name='totalQty'
-													placeholder='Total Q' class="form-control" required /></td>
+													placeholder='Total Quantity' class="form-control" required /></td>
 												<td><input type="text" name='receiver'
 													placeholder='Receiver' class="form-control" /></td>
 												
@@ -164,9 +194,7 @@
 				</form>
 			</div>
 			<div id="menu2" class="tab-pane fade">
-				<h3>Menu 2</h3>
-				<p>Sed ut perspiciatis unde omnis iste natus error sit
-					voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+			
 			</div>
 			<div id="menu3" class="tab-pane fade">
 				<h3>Menu 3</h3>
@@ -184,6 +212,7 @@
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/js/challanTable.js"></script>
+	<script src="/js/dataTable.js"></script>
 
 
 	<!-- 

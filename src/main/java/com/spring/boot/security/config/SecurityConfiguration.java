@@ -15,7 +15,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.spring.boot.security.utils.AppAuthenticationHandler;
+import com.spring.boot.security.utils.UserLogOutHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +28,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	UserDetailsService userDetailsService;
+	@Autowired
+	AuthenticationSuccessHandler appAuthenticationHandler;
+	@Autowired
+	UserLogOutHandler logoutHandler;
+	
+	
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,12 +63,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated()
 		
 		.and()
-		.formLogin().loginPage("/login").permitAll()
+		.formLogin().loginPage("/login").permitAll().successHandler(appAuthenticationHandler)
 		.and()
-		.logout().invalidateHttpSession(true)
+		.logout()
+		.invalidateHttpSession(true)
 		.clearAuthentication(true)
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/logout-success").permitAll()
+		.logoutSuccessUrl("/logout-success").permitAll().addLogoutHandler(logoutHandler);
 		;
 		
 	}

@@ -12,9 +12,9 @@ public class LotBookData {
 	@Autowired
 	LotBookRepository lotBookRepository;
 	
-	public void saveLotBook(LotBook lotBook)
+	public LotBook saveLotBook(LotBook lotBook)
 	{
-		lotBookRepository.save(lotBook);
+		return lotBookRepository.save(lotBook);
 	}
 	
 }

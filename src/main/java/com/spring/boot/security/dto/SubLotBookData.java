@@ -12,9 +12,9 @@ public class SubLotBookData {
 	@Autowired
 	SubLotBookRepository subLotBookRepository;
 	
-	public void saveSubLotBookData(SubLotBook subLotBook)
+	public SubLotBook saveSubLotBookData(SubLotBook subLotBook)
 	{
-		subLotBookRepository.save(subLotBook);
+		return subLotBookRepository.save(subLotBook);
 	}
 	
 

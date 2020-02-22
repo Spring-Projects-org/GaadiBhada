@@ -3,6 +3,7 @@ package com.spring.boot.security.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 public class LotBook {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="lot_id")
 	private int lotId;
 	@Column(name="challan_id")
@@ -26,6 +27,10 @@ public class LotBook {
 	private int totalWt;
 	@Column(name="box_id")
 	private int boxId;
+	@Column(name="crte_tms")
+	private String createTimeStamp;
+	@Column(name="session_id")
+	private String sessionId;
 	
 	
 	public int getLotId() {
@@ -71,6 +76,26 @@ public class LotBook {
 	}
 	public void setBoxId(int boxId) {
 		this.boxId = boxId;
+	}
+
+
+	public String getCreateTimeStamp() {
+		return createTimeStamp;
+	}
+
+
+	public void setCreateTimeStamp(String createTimeStamp) {
+		this.createTimeStamp = createTimeStamp;
+	}
+
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 	
 	
