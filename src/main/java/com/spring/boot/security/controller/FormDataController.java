@@ -28,6 +28,7 @@ import com.spring.boot.security.entity.LotBook;
 import com.spring.boot.security.entity.SubLotBook;
 import com.spring.boot.security.exception.AppHttpException;
 import com.spring.boot.security.exception.DataBaseException;
+import com.spring.boot.security.helper.FormUtils;
 import com.spring.boot.security.repository.BoxDetailsRepository;
 import com.spring.boot.security.repository.LotBookRepository;
 import com.spring.boot.security.repository.SubLotBookRepository;
@@ -46,8 +47,6 @@ public class FormDataController {
 	@Autowired
 	LotBookRepository lotBookRepository;
 	
-	@Autowired
-	SubLotBookRepository subLotBookRepository;
 	
 	@RequestMapping(value="/management/saveChallan" ,method=RequestMethod.POST)
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = DataBaseException.class)
@@ -100,26 +99,15 @@ public class FormDataController {
 			lotBook.setBoxId(boxId[i]);
 			lotBook.setSessionId(sessionId);
 			lotBook.setCreateTimeStamp(currentDate);
+			lotBook.setIsDistributed("N");
+			if(receiver.length!=0)
+			lotBook.setReceiver(FormUtils.nullToEmpty(receiver[i]));
 			LotBook savedLotBook=lotBookRepository.save(lotBook);
 			LOGGER.info("Saving Lot Data.....");
 			if(savedLotBook==null) {
 				
 					throw new DataBaseException("Exception found while saving data into Lot Book ","management");
 				
-			}
-			SubLotBook subLotBook=new SubLotBook();
-			subLotBook.setLot_id(lotBook.getLotId());
-			if(receiver.length!=0)
-			subLotBook.setReceiver(receiver[i]);
-			subLotBook.setTotal_fare(0);
-			subLotBook.setTotal_qty(0);
-			subLotBook.setSessionId(sessionId);
-			subLotBook.setCreateTimeStamp(currentDate);
-			SubLotBook savedSubLotBook=subLotBookRepository.save(subLotBook);
-			LOGGER.info("Saving SubLot Data.....");
-			if(savedSubLotBook==null) {
-		
-					throw new DataBaseException("Exception found while saving data into Sub Lot Book ","management");
 			}
 			
 		}

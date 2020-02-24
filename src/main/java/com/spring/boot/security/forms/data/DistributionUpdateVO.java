@@ -15,6 +15,9 @@ public class DistributionUpdateVO {
 	private String box_name;
 	private int total_wt;
 	private int total_qty;
+	private int lot_id;
+	private String reciever;
+	private int totBal;
 	
 	public int getChallan_id() {
 		return challan_id;
@@ -81,6 +84,24 @@ public class DistributionUpdateVO {
 	}
 	public void setTotal_qty(int total_qty) {
 		this.total_qty = total_qty;
+	}
+	public int getLot_id() {
+		return lot_id;
+	}
+	public void setLot_id(int lot_id) {
+		this.lot_id = lot_id;
+	}
+	public String getReciever() {
+		return reciever;
+	}
+	public void setReciever(String reciever) {
+		this.reciever = reciever;
+	}
+	public int getTotBal() {
+		return totBal;
+	}
+	public void setTotBal(int totBal) {
+		this.totBal = totBal;
 	}
 
 }

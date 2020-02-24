@@ -31,6 +31,9 @@ public class LotBook {
 	private String createTimeStamp;
 	@Column(name="session_id")
 	private String sessionId;
+	@Column(name="is_Distributed")
+	private String isDistributed;
+	private String receiver;
 	
 	
 	public int getLotId() {
@@ -96,6 +99,26 @@ public class LotBook {
 
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
+	}
+
+
+	public String getIsDistributed() {
+		return isDistributed;
+	}
+
+
+	public void setIsDistributed(String isDistributed) {
+		this.isDistributed = isDistributed;
+	}
+
+
+	public String getReceiver() {
+		return receiver;
+	}
+
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 	
 	

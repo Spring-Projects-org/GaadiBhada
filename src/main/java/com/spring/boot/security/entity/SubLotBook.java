@@ -14,45 +14,44 @@ public class SubLotBook {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int sub_lot_id;
-	private int lot_id;
-	private String receiver;
-	private int total_qty;
-	private int total_fare;
+	@Column(name="sub_lot_id")
+	private int subLotId;
+	@Column(name="lot_id")
+	private int lotId;
+	@Column(name="total_qty")
+	private int totalQty;
+	@Column(name="agent_destination_id")
+	private int agentDestinationId;
 	@Column(name="crte_tms")
 	private String createTimeStamp;
 	@Column(name="session_id")
 	private String sessionId;
+	@Column(name="agent_id")
+	private int agentId;
 	
-	public int getSub_lot_id() {
-		return sub_lot_id;
+	public int getSubLotId() {
+		return subLotId;
 	}
-	public void setSub_lot_id(int sub_lot_id) {
-		this.sub_lot_id = sub_lot_id;
+	public void setSubLotId(int subLotId) {
+		this.subLotId = subLotId;
 	}
-	public int getLot_id() {
-		return lot_id;
+	public int getLotId() {
+		return lotId;
 	}
-	public void setLot_id(int lot_id) {
-		this.lot_id = lot_id;
+	public void setLotId(int lotId) {
+		this.lotId = lotId;
 	}
-	public String getReceiver() {
-		return receiver;
+	public int getTotalQty() {
+		return totalQty;
 	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setTotalQty(int totalQty) {
+		this.totalQty = totalQty;
 	}
-	public int getTotal_qty() {
-		return total_qty;
+	public int getAgentDestinationId() {
+		return agentDestinationId;
 	}
-	public void setTotal_qty(int total_qty) {
-		this.total_qty = total_qty;
-	}
-	public int getTotal_fare() {
-		return total_fare;
-	}
-	public void setTotal_fare(int total_fare) {
-		this.total_fare = total_fare;
+	public void setAgentDestinationId(int agentDestinationId) {
+		this.agentDestinationId = agentDestinationId;
 	}
 	public String getCreateTimeStamp() {
 		return createTimeStamp;
@@ -66,4 +65,12 @@ public class SubLotBook {
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
+	public int getAgentId() {
+		return agentId;
+	}
+	public void setAgentId(int agentId) {
+		this.agentId = agentId;
+	}
+	
+	
 }

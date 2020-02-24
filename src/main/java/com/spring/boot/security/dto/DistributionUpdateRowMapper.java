@@ -25,6 +25,8 @@ public class DistributionUpdateRowMapper implements RowMapper<DistributionUpdate
 		distributionUpdateVO.setBox_name(rs.getString(++i));
 		distributionUpdateVO.setTotal_wt(rs.getInt(++i));
 		distributionUpdateVO.setTotal_qty(rs.getInt(++i));
+		distributionUpdateVO.setLot_id(rs.getInt(++i));
+		distributionUpdateVO.setTotBal(rs.getInt(++i));
 
 		return distributionUpdateVO;
 	}
